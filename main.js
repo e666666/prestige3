@@ -2,7 +2,7 @@ let layer = 0;
 
 let data = {
 	coins: 0,
-	lastUpdate: 0,
+	lastUpdate: new Date().getTime(),
 	prestiges: (()=>{
 		let a=[];
 		for (let x = 0; x < 10; x++) {
@@ -92,6 +92,7 @@ function update() {
   	diff = diff/100
   	if (diff < 0) diff = 1
 	data.coins += getGain()*diff;
+	player.lastUpdate = thisUpdate
 	draw()
 	setTimeout(update,10)
 }
@@ -140,7 +141,7 @@ function updateDescriptionsAndNames() {
 window.addEventListener("load",function () {
 	if (localStorage.OH_NO) {
 		data = JSON.parse(localStorage.OH_NO)
-		if (typeof data.lastUpdate === 'undefined') data.lastUpdate = 0
+		if (typeof data.lastUpdate === 'undefined') data.lastUpdate = new Date().getTime()
 	}
 	let table = document.getElementById("buyables");
 	updateDescriptionsAndNames();
