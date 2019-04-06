@@ -88,7 +88,7 @@ function activatePrestige(x,y,z) {
 
 function update() {
 	var thisUpdate = new Date().getTime()
-  	if (typeof diff === 'undefined') var diff = Math.min(thisUpdate - player.lastUpdate, 21600000);
+  	if (typeof diff === 'undefined') var diff = Math.min(thisUpdate - data.lastUpdate, 21600000);
   	diff = diff/100
   	if (diff < 0) diff = 1
 	data.coins += getGain()*diff;
@@ -140,6 +140,7 @@ function updateDescriptionsAndNames() {
 window.addEventListener("load",function () {
 	if (localStorage.OH_NO) {
 		data = JSON.parse(localStorage.OH_NO)
+		if (typeof data.lastUpdate === 'undefined') data.lastUpdate = 0
 	}
 	let table = document.getElementById("buyables");
 	updateDescriptionsAndNames();
