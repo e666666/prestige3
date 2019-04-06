@@ -91,7 +91,7 @@ function update() {
   	if (typeof diff === 'undefined') var diff = Math.min(thisUpdate - data.lastUpdate, 21600000);
   	diff = diff/100
   	if (diff < 0) diff = 1
-	data.coins += getGain()*diff;
+	data.coins += getGain()*diff/10;
 	data.lastUpdate = thisUpdate
 	draw()
 	setTimeout(update,10)
