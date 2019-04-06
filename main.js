@@ -102,7 +102,7 @@ function save() {
 }
 
 function draw() {
-	document.getElementById("coins").innerHTML = data.coins;
+	document.getElementById("coins").innerHTML = formatValue(data.coins,"Scientific",2,1);
 	document.getElementById("layer").innerHTML = layer;
 	document.getElementById("gain").innerHTML = getGain();
 	for (let i = 0; i < 10; i++) {
