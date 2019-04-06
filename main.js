@@ -92,7 +92,7 @@ function update() {
   	diff = diff/100
   	if (diff < 0) diff = 1
 	data.coins += getGain()*diff;
-	player.lastUpdate = thisUpdate
+	data.lastUpdate = thisUpdate
 	draw()
 	setTimeout(update,10)
 }
