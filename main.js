@@ -2,6 +2,7 @@ let layer = 0;
 
 let data = {
 	coins: 0,
+	lastUpdate: 0,
 	prestiges: (()=>{
 		let a=[];
 		for (let x = 0; x < 10; x++) {
@@ -86,7 +87,16 @@ function activatePrestige(x,y,z) {
 }
 
 function update() {
-	data.coins += getGain();
+	var thisUpdate = new Date().getTime()
+  	if (typeof diff === 'undefined') var diff = Math.min(thisUpdate - player.lastUpdate, 21600000);
+  	diff = diff/100
+  	if (diff < 0) diff = 1
+	data.coins += getGain()*diff;
+	draw()
+	setTimeout(update,10)
+}
+
+function save() {
 	localStorage.OH_NO= JSON.stringify(data);
 }
 
@@ -181,9 +191,7 @@ window.addEventListener("load",function () {
 		}
 	});
 	draw();
-	setInterval(function () {
-		update();
-		draw();
-	}, 1000);
+	setInterval(save,5000)
+	update()
 	console.log("interval loaded")
 })
